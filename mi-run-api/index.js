@@ -78,7 +78,8 @@ app.post('/run', function(req, response, next) {
 			return token_info;
 		} catch (e) {
 			console.log("获取AccessToken失败");
-			response.status(400).send("获取AccessToken失败")
+			response.status(200).send({err:"获取AccessToken失败",code:'402'})
+			response.end()
 			throw e;
 		}
 	}
@@ -111,7 +112,8 @@ app.post('/run', function(req, response, next) {
 			throw new Error("获取登录授权码失败");
 		} catch (e) {
 			console.log("登录失败， 请检查账号密码");
-			response.status(400).send();
+			response.status(200).send({err:"登录失败， 请检查账号密码",code:'401'});
+			response.end()
 			throw e;
 		}
 	}
@@ -134,11 +136,12 @@ app.post('/run', function(req, response, next) {
 					},
 				}
 			);
-			response.status(200).send(req.body)
+			response.status(200).send({success:"刷步数成功！",code:'200'})
 			console.log(`上传步数成功 step：${step}`);
 		} catch (e) {
 			console.log("上传步数失败");
-			response.status(400).send("上传步数失败")
+			response.status(200).send({err:"上传步数失败",code:'403'})
+			response.end()
 			throw e;
 		}
 	}

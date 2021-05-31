@@ -53,24 +53,26 @@
 							password: this.input2,
 							steps: this.input3
 						})
-						.then(res => {
-							console.log(res)
-							this.$message({
-								showClose: true,
-								message: '成功！',
-								type: 'success',
-								center: true
-							});
-						})
-						.catch(err => {
-							this.$message({
-								showClose: true,
-								message: '您输入的账号或密码不正确，请重新输入！',
-								type: 'error',
-								center: true
-							});
-							this.input1 = ''
-							this.input2 = ''
+						.then(({
+							data
+						}) => {
+							if (data.code == 200) {
+								this.$message({
+									showClose: true,
+									message: data.success,
+									type: 'success',
+									center: true
+								});
+							} else {
+								this.$message({
+									showClose: true,
+									message: data.err,
+									type: 'error',
+									center: true
+								});
+								this.input1 = ''
+								this.input2 = ''
+							}
 						})
 				}
 			},
