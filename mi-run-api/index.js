@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3100
 const fs = require('fs/promises')
 const Axios = require('axios')
 const dayjs = require('dayjs')
@@ -31,8 +31,7 @@ const axios = Axios.create({
 });
 
 // 路由
-app.post('/run', function(req, res, next) {
-	// res.status('200').send(req.body)
+app.post('/run', function(req, response, next) {
 	const config = {
 		username: req.body.phoneNumber,
 		password: req.body.password,
@@ -75,13 +74,11 @@ app.post('/run', function(req, res, next) {
 	
 		try {
 			const res = await axios.post("https://account.huami.com/v2/client/login", data);
-	
 			const token_info = res.data.token_info;
-			console.log(`获取AccessToken成功 token: ${token_info.login_token}`);
 			return token_info;
 		} catch (e) {
 			console.log("获取AccessToken失败");
-			res.status('400').send("获取AccessToken失败")
+			response.status(400).send("获取AccessToken失败")
 			throw e;
 		}
 	}
@@ -102,8 +99,6 @@ app.post('/run', function(req, res, next) {
 				`https://api-user.huami.com/registrations/+86${username}/tokens`,
 				data
 			);
-			console.log("登录成功, 开始获取登录授权码");
-			console.log(res.request.path)
 			// 获取Code
 			const path = new URL(res.request.path, redirect_uri);
 	
@@ -116,7 +111,7 @@ app.post('/run', function(req, res, next) {
 			throw new Error("获取登录授权码失败");
 		} catch (e) {
 			console.log("登录失败， 请检查账号密码");
-			res.status('400').send("登录失败， 请检查账号密码")
+			response.status(400).send();
 			throw e;
 		}
 	}
@@ -139,11 +134,11 @@ app.post('/run', function(req, res, next) {
 					},
 				}
 			);
-	
+			response.status(200).send(req.body)
 			console.log(`上传步数成功 step：${step}`);
 		} catch (e) {
 			console.log("上传步数失败");
-			res.status('400').send("上传步数失败")
+			response.status(400).send("上传步数失败")
 			throw e;
 		}
 	}
