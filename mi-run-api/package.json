@@ -1,0 +1,17 @@
+{
+  "name": "mi-run-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "凪",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
