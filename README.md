@@ -4,7 +4,7 @@
 
 > 通过华米运动的 API 提交运动步数 <br/>
 > 可实现同步运动步数至热门平台，如微信、支付宝等<br/>
-> 演示地址：http://lovexiaozhang.cool
+> 演示地址：https://run.996.media
 
 #### 软件架构
 前台：Vue+Element
@@ -40,6 +40,6 @@ node index (npx nodemon)
 ```
 
 #### 参与贡献
-基于Github 项目二次开发：[sport-editor](https://github.com/Devifish/sport-editor "sport-editor")
+基于Github 项目二次开发：[mi-run-node-express-vue](https://github.com/zhangwenhaoyue/mi-run-node-express-vue "mi-run-node-express-vue")
 
 
