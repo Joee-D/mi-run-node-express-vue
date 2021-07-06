@@ -1,9 +1,23 @@
 const express = require('express')
-const app = express()
-const port = 3100
-const fs = require('fs/promises')
+const httpport = 3100
+const httpsport = 3101
+const fs = require('fs')
 const Axios = require('axios')
 const dayjs = require('dayjs')
+
+
+var https = require('https');
+var http = require('http');
+
+//同步读取密钥和签名证书
+var options = {
+    key:fs.readFileSync('./privkey.pem'),
+    cert:fs.readFileSync('./fullchain.pem')
+}
+
+var app = express();
+var httpsServer = https.createServer(options,app);
+var httpServer = http.createServer(app);
 
 // 允许跨域访问
 app.all('*', function(req, res, next) {
@@ -151,7 +165,7 @@ app.post('/run', function(req, response, next) {
 		const find_date = /.*?date":"(.*?)","data.*?/;
 		const find_step = /.*?ttl\\":(.*?),\\"dis.*?/;
 	
-		let data_json = await fs.readFile("./data.json", "utf-8");
+		data_json = fs.readFileSync("./data.json", 'utf-8');
 		data_json = data_json.replace(find_date.exec(data_json)[1], time);
 		data_json = data_json.replace(find_step.exec(data_json)[1], step);
 		return data_json;
@@ -161,6 +175,10 @@ app.post('/run', function(req, response, next) {
 
 
 
-app.listen(port, () => {
-	console.log(`Example app listening at http://localhost:${port}`)
+httpServer.listen(httpport, () => {
+	console.log(`Example app listening at http://localhost:${httpport}`)
+})
+
+httpsServer.listen(httpsport, () => {
+	console.log(`Example app listening at https://localhost:${httpsport}`)
 })

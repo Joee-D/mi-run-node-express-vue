@@ -5,9 +5,7 @@
 			<p class="lead">欢迎来到 帮你出去走走</p>
 			<hr class="my-4">
 			<p style="color: red;">使用之前请先看教程：</p>
-			<a class="btn btn-primary btn-lg" href="https://docs.qq.com/doc/DV3hOTWRQVkxCZHdt" role="button">教程</a>
-			<p>下载：</p>
-			<a class="btn btn-primary btn-lg" href="帮你出去走走.apk" download="帮你出去走走.apk">Android</a>
+			<a class="btn btn-primary btn-lg" href="https://docs.qq.com/doc/DU1lSSGRBT1pKQlVB" role="button">教程</a>
 		</div>
 		<el-divider></el-divider>
 		<div align="center">
